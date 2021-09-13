@@ -1,5 +1,3 @@
-
-
 LightSource =Class{}
 
 function LightSource:init(data)
