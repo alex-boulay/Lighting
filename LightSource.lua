@@ -36,7 +36,7 @@ function LightSource:Obsctructions(Olist)
   for k,seg in pairs(seglist) do
     table.insert(shadows,self.shape.c:ScreenWallProj(seg,screenbox))
   end
-  love.graphics.setColor(-1,-1,-1)
+  love.graphics.setColor(0,0,0)
   for k,sha in pairs(shadows) do
     sha:Draw()
   end
