@@ -65,5 +65,4 @@ end
 
 function LightSource:Draw(shader)
     self:send(shader)
-    love.graphics.setShader(shader)
 end

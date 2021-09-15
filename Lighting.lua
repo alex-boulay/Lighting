@@ -26,6 +26,7 @@ function Lighting:init(data)
   self.buffers={}
   self.itemtree={}
   self.shader=love.graphics.newShader(LightSD)
+  self.canvas=love.graphics.newCanvas()
 end
 
 function Lighting:addLight(l)
@@ -45,11 +46,21 @@ function Lighting:lightCanvas()
 
 end
 
-function Lighting:drawLights()
 
+function Lighting:prep()
+  love.graphics.push("all")
+  love.graphics.setShader(self.shader)
+  --love.graphics.setCanvas(self.)
+end
+
+--And God said, Let there be light: and there was light.
+function Lighting:drawLights()
   for k,light in pairs(self.lights) do
     light:Draw(self.shader)
-    --light:Obsctructions(self.obstruct)
+  end
+  love.graphics.pop()
+  for k,light in pairs(self.lights)do
+    light:Obsctructions(self.obstruct)
   end
 end
 
