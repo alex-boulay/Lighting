@@ -5,6 +5,7 @@ function LightSource:init(data)
   self.color=data.color or {1,1,1}
   self.hasmoved=false --trying to optimise calculus for static lights
   self.canvas=love.graphics.newCanvas()
+  self.screen=data.screen
 end
 
 function LightSource:send(shader)
