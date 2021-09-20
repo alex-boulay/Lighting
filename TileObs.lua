@@ -5,14 +5,14 @@ end
 TILE_VEC= Vector(TILE_SIZE,TILE_SIZE)
 math.randomseed(os.time())
 
-function TileObs:init(x,y,obst,color)
-  Rectangle.init(self,Vector(x,y),TILE_VEC)
-  if color==nil then
+function TileObs:init(t)
+  Rectangle.init(self,Vector(t.x,t.y),Vector(t.w or TILE_SIZE,t.h or TILE_SIZE))
+  if t.color==nil then
     self.color={ math.random(),math.random() ,math.random()}
   else
-    self.color=color
+    self.color=t.color
   end
-  self.obst=obst or 0 --boolens to remove Edges
+  self.obst=t.obst or 0 --boolens to remove Edges
 end
 
 function TileObs:Draw()

@@ -9,7 +9,7 @@ function LightSource:init(data)
 end
 
 function LightSource:send(shader)
-  shader:send("lightpos",{self.shape.c.x,self.shape.c.y})
+  shader:send("lightpos",{self.shape.c.x-self.screen.c.x,self.shape.c.y-self.screen.c.y})
   shader:send("lightradius",self.shape.r)
   shader:send("lightcolor",self.color)
 end
@@ -34,8 +34,16 @@ end
 function LightSource:Obsctructions(Olist)
   local seglist=self:getObsSeg(Olist)
   local shadows={}
+  local offsetx=-self.screen.c.x
+  local offsety=-self.screen.c.y
+  local tk1
   for k,seg in pairs(seglist) do
-    table.insert(shadows,self.shape.c:ScreenWallProj(seg,screenbox))
+    tk1=self.shape.c:ScreenWallProj(seg,self.screen)
+    if tk1~=nil then
+      tk1:offset(offsetx,offsety)
+      table.insert(shadows,tk1)
+    end
+    tk1=nil
   end
   love.graphics.setColor(0,0,0)
   for k,sha in pairs(shadows) do
